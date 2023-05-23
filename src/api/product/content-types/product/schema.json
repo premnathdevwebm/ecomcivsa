@@ -58,6 +58,12 @@
     },
     "sellingPrice": {
       "type": "float"
+    },
+    "orders": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::order.order",
+      "mappedBy": "product"
     }
   }
 }

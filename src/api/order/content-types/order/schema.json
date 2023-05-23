@@ -4,14 +4,85 @@
   "info": {
     "singularName": "order",
     "pluralName": "orders",
-    "displayName": "Order"
+    "displayName": "Order",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "order": {
+    "orderName": {
+      "type": "string"
+    },
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product.product",
+      "inversedBy": "orders"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "modeOfPay": {
+      "type": "enumeration",
+      "enum": [
+        "COD",
+        "Prepaid"
+      ],
+      "default": "COD"
+    },
+    "payStatus": {
+      "type": "enumeration",
+      "enum": [
+        "Pending",
+        "Confirmed",
+        "Cancelled"
+      ],
+      "default": "Pending"
+    },
+    "shipmentId": {
+      "type": "string"
+    },
+    "AWB": {
+      "type": "string"
+    },
+    "download1": {
+      "type": "string"
+    },
+    "download2": {
+      "type": "string"
+    },
+    "orderSKU": {
+      "type": "string"
+    },
+    "orderUnits": {
+      "type": "integer"
+    },
+    "orderSelling": {
+      "type": "float"
+    },
+    "orderWeight": {
+      "type": "float"
+    },
+    "orderHeight": {
+      "type": "float"
+    },
+    "orderBreadth": {
+      "type": "float"
+    },
+    "orderLength": {
+      "type": "float"
+    },
+    "orderType": {
+      "type": "string"
+    },
+    "couriername": {
+      "type": "string"
+    },
+    "orderId": {
       "type": "string"
     }
   }
