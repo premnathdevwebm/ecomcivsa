@@ -31,4 +31,14 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
       return;
     }
   },
+  async myOdrers(ctx) {
+    try{
+      const response = await strapi.service("api::order.order").myOdrers(ctx.state.user);
+      return response;
+    }catch(err){
+      strapi.log.error(err);
+      ctx.response.status = 500;
+      return;
+    }
+  },
 }));

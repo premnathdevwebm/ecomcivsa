@@ -5,22 +5,22 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const { calling } = require("../../../plugins/shiprocket");
 const { sendEmail } = require("../../../plugins/sendgrid");
 const generateMailBody = require("../../../plugins/sendgrid/templates");
-const { message } = require("../../../plugins/twilio")
+const { message } = require("../../../plugins/twilio");
 
 /**
  * order service
- */
+ *
+*/
 
 const myEmitter = new EventEmitter();
 
-myEmitter.on("sms", async(arg1, arg2)=>{
+myEmitter.on("sms", async (arg1, arg2) => {
   try {
-    await message(`An order was placed with ${arg1} ${arg2}`, "+916382709971")
-    
+    await message(`An order was placed with ${arg1} ${arg2}`, "+916382709971");
   } catch (error) {
     console.error(error);
   }
-})
+});
 
 myEmitter.on("mail", async (arg1, arg2) => {
   try {
@@ -61,7 +61,11 @@ myEmitter.on("updateOrder", (arg, arg1) => {
         [arg1?.payload?.label_url, arg1?.payload?.manifest_url],
         mailBody
       );
-      myEmitter.emit("sms",  `${arg1.payload.shipment_id}`, `${arg1.payload.order_id}`)
+      myEmitter.emit(
+        "sms",
+        `${arg1.payload.shipment_id}`,
+        `${arg1.payload.order_id}`
+      );
     } catch (err) {
       console.log(JSON.stringify(err));
       return err;
@@ -232,6 +236,18 @@ module.exports = createCoreService("api::order.order", ({ strapi }) => ({
       }
       await processOrder(ordersPlaced);
       return ordersPlaced;
+    } catch (err) {
+      return err;
+    }
+  },
+  async myOdrers(user) {
+    try {
+      const response = await strapi.entityService.findMany("api::order.order", {
+        filters: { users_permissions_user: user.id },
+        sort: { createdAt: "DESC" },
+        limit: 10
+      });
+      return response;
     } catch (err) {
       return err;
     }
