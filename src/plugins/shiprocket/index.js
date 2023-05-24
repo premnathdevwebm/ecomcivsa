@@ -80,7 +80,7 @@ async function transcationList(body){
   try {
     const token = await ApiCall();
     const response = await AuthShipRock(token).get(
-      `courier/track/awb/${body}`
+      `/courier/track/shipment/${body}`
     );
     return response.data;
   } catch (err) {
