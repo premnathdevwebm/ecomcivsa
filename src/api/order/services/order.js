@@ -2,7 +2,7 @@
 const { createCoreService } = require("@strapi/strapi").factories;
 const EventEmitter = require("events");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-const { calling } = require("../../../plugins/shiprocket");
+const { calling, transcationList } = require("../../../plugins/shiprocket");
 const { sendEmail } = require("../../../plugins/sendgrid");
 const generateMailBody = require("../../../plugins/sendgrid/templates");
 const { message } = require("../../../plugins/twilio");
@@ -10,7 +10,7 @@ const { message } = require("../../../plugins/twilio");
 /**
  * order service
  *
-*/
+ */
 
 const myEmitter = new EventEmitter();
 
@@ -245,8 +245,16 @@ module.exports = createCoreService("api::order.order", ({ strapi }) => ({
       const response = await strapi.entityService.findMany("api::order.order", {
         filters: { users_permissions_user: user.id },
         sort: { createdAt: "DESC" },
-        limit: 10
+        limit: 10,
       });
+      return response;
+    } catch (err) {
+      return err;
+    }
+  },
+  async transactionsList(data) {
+    try {
+      const response = await transcationList(data);
       return response;
     } catch (err) {
       return err;

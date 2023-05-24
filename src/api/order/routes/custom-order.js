@@ -15,5 +15,10 @@ module.exports = {
       path: "/myorders",
       handler: "order.myOdrers",
     },
+    {
+      method: "GET",
+      path: "/myorder/:transaction",
+      handler: "order.transactionsList",
+    },
   ],
 };

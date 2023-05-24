@@ -41,4 +41,15 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
       return;
     }
   },
+  async transactionsList(ctx){
+    try {
+      const {transaction} =(ctx.params);
+      const response = await strapi.service("api::order.order").transactionsList(transaction)
+      return response
+    } catch (err) {
+      strapi.log.error(err);
+      ctx.response.status = 500;
+      return;
+    }
+  }
 }));

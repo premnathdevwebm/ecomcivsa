@@ -70,10 +70,24 @@ async function calling(body) {
       obj
     );
     return response.data;
-  } catch (error) {
+  } catch (err) {
+    console.error(err);
+    return;
+  }
+}
+
+async function transcationList(body){
+  try {
+    const token = await ApiCall();
+    const response = await AuthShipRock(token).get(
+      `courier/track/awb/${body}`
+    );
+    return response.data;
+  } catch (err) {
     console.error(err);
     return;
   }
 }
 
 module.exports.calling = calling;
+module.exports.transcationList = transcationList
