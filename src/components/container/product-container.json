@@ -1,7 +1,8 @@
 {
   "collectionName": "components_container_product_containers",
   "info": {
-    "displayName": "productContainer"
+    "displayName": "productContainer",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -19,6 +20,21 @@
     },
     "breadth": {
       "type": "float"
+    },
+    "imageSrc": {
+      "type": "string"
+    },
+    "imageSrc2": {
+      "type": "string"
+    },
+    "isActive": {
+      "type": "boolean"
+    },
+    "mrpPrice": {
+      "type": "float"
+    },
+    "title": {
+      "type": "string"
     }
   }
 }

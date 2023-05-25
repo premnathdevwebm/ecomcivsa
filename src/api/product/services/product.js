@@ -23,7 +23,7 @@ module.exports = createCoreService("api::product.product", ({ strapi }) => ({
     try {
       const response = await strapi.entityService.findMany(
         "api::product.product",
-        { filters: { SKU: title } }
+        { filters: { SKU: title }, populate: ["singleContainer", "doubleContainer", "tripleContainer", "combo"] }
       );
       return response;
     } catch (err) {

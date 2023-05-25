@@ -64,6 +64,29 @@
       "relation": "oneToMany",
       "target": "api::order.order",
       "mappedBy": "product"
+    },
+    "combo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "container.combo-product"
+    },
+    "ingredients": {
+      "type": "text"
+    },
+    "nutritioinalInfo": {
+      "type": "text"
+    },
+    "faq": {
+      "type": "text"
+    },
+    "category": {
+      "type": "string"
+    },
+    "benefitAndUses": {
+      "type": "text"
+    },
+    "type": {
+      "type": "string"
     }
   }
 }

@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_container_combo_products",
+  "info": {
+    "displayName": "comboProduct"
+  },
+  "options": {},
+  "attributes": {
+    "isComboed": {
+      "type": "boolean"
+    },
+    "imgSrc1": {
+      "type": "string"
+    },
+    "imgSrc2": {
+      "type": "string"
+    },
+    "MrpPrice": {
+      "type": "float"
+    },
+    "SKU": {
+      "type": "string"
+    },
+    "sellingPrice": {
+      "type": "float"
+    }
+  }
+}
