@@ -22,7 +22,7 @@
       "type": "float"
     },
     "imageSrc": {
-      "type": "string"
+      "type": "text"
     },
     "imageSrc2": {
       "type": "string"
