@@ -76,7 +76,7 @@ async function calling(body) {
   }
 }
 
-async function transcationList(body){
+async function transcationList(body) {
   try {
     const token = await ApiCall();
     const response = await AuthShipRock(token).get(
@@ -89,5 +89,19 @@ async function transcationList(body){
   }
 }
 
+async function shipOrderInvoice(body) {
+  try {
+    const token = await ApiCall();
+    const response = await AuthShipRock(token).post("/orders/print/invoice", {
+      ids: [body],
+    });
+    return response.data;
+  } catch (err) {
+    console.error(err);
+    return;
+  }
+}
+
 module.exports.calling = calling;
-module.exports.transcationList = transcationList
+module.exports.transcationList = transcationList;
+module.exports.shipOrderInvoice = shipOrderInvoice;

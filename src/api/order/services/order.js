@@ -2,7 +2,11 @@
 const { createCoreService } = require("@strapi/strapi").factories;
 const EventEmitter = require("events");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-const { calling, transcationList } = require("../../../plugins/shiprocket");
+const {
+  calling,
+  transcationList,
+  shipOrderInvoice,
+} = require("../../../plugins/shiprocket");
 const { sendEmail } = require("../../../plugins/sendgrid");
 const generateMailBody = require("../../../plugins/sendgrid/templates");
 const { message } = require("../../../plugins/twilio");
@@ -51,6 +55,16 @@ myEmitter.on("updateOrder", (arg, arg1) => {
         },
       });
 
+      myEmitter.emit("attachInvoice", {
+        internalOrderId: arg[0].id,
+        shipRocketOrderId: arg1.payload.order_id,
+      });
+
+      myEmitter.emit(
+        "sms",
+        `${arg1.payload.shipment_id}`,
+        `${arg1.payload.order_id}`
+      );
       const mailBody = generateMailBody(
         arg[0].users_permissions_user.username,
         `${arg1.payload.shipment_id}`,
@@ -61,16 +75,20 @@ myEmitter.on("updateOrder", (arg, arg1) => {
         [arg1?.payload?.label_url, arg1?.payload?.manifest_url],
         mailBody
       );
-      myEmitter.emit(
-        "sms",
-        `${arg1.payload.shipment_id}`,
-        `${arg1.payload.order_id}`
-      );
     } catch (err) {
       console.log(JSON.stringify(err));
       return err;
     }
   });
+});
+
+myEmitter.on("attachInvoice", async (arg1) => {
+  try {
+    await generateInvoice(arg1);
+  } catch (error) {
+    console.log(JSON.stringify(err));
+    return err;
+  }
 });
 
 async function payment(body) {
@@ -87,7 +105,19 @@ async function payment(body) {
     return err;
   }
 }
-
+async function generateInvoice(data) {
+  try {
+    const response = await shipOrderInvoice(data.shipRocketOrderId);
+    await strapi.entityService.update(
+      "api::order.order",
+      data.internalOrderId,
+      { data: { invoiceURL: response.invoice_url } }
+    );
+  } catch (err) {
+    console.error(err);
+    throw new Error(err);
+  }
+}
 async function processOrder(orders) {
   try {
     const responseIntermediate = orders.map(async (ele) => {

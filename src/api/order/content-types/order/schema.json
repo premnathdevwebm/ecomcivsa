@@ -84,6 +84,9 @@
     },
     "orderId": {
       "type": "string"
+    },
+    "invoiceURL": {
+      "type": "string"
     }
   }
 }
