@@ -37,7 +37,8 @@ myEmitter.on("mail", async (arg1, arg2) => {
       arg2
     );
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
+    return error.response.data;
   }
 });
 
@@ -191,6 +192,7 @@ async function processOrder(orders) {
             }
           })
           .catch((err1) => {
+            console.log(err1.data.errors);
             throw new Error(err1);
           });
       })

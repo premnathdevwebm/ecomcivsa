@@ -71,8 +71,7 @@ async function calling(body) {
     );
     return response.data;
   } catch (err) {
-    console.error(err);
-    return;
+    return err?.response.data;
   }
 }
 
@@ -84,8 +83,7 @@ async function transcationList(body) {
     );
     return response.data;
   } catch (err) {
-    console.error(err);
-    return;
+    return err.response.data;
   }
 }
 
@@ -97,8 +95,7 @@ async function shipOrderInvoice(body) {
     });
     return response.data;
   } catch (err) {
-    console.error(err);
-    return;
+    return err.response.data;
   }
 }
 
