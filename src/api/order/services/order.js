@@ -143,7 +143,7 @@ async function processOrder(orders) {
           units: ele.orderUnits,
           selling_price: ele.orderSelling,
           discount: "",
-          tax: "",
+          tax: 18,
         }));
         const name = data[0].users_permissions_user.username;
         const address1 = data[0].users_permissions_user.address1;
