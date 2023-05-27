@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_month_month_usages",
+  "info": {
+    "displayName": "monthUsage"
+  },
+  "options": {},
+  "attributes": {
+    "wight": {
+      "type": "float"
+    },
+    "month": {
+      "type": "string"
+    },
+    "height": {
+      "type": "float"
+    },
+    "length": {
+      "type": "float"
+    },
+    "breadth": {
+      "type": "float"
+    },
+    "mrp": {
+      "type": "float"
+    },
+    "selling": {
+      "type": "float"
+    }
+  }
+}

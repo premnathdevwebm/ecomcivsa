@@ -1,7 +1,8 @@
 {
   "collectionName": "components_container_combo_products",
   "info": {
-    "displayName": "comboProduct"
+    "displayName": "comboProduct",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -22,6 +23,24 @@
     },
     "sellingPrice": {
       "type": "float"
+    },
+    "name": {
+      "type": "string"
+    },
+    "month1": {
+      "type": "component",
+      "repeatable": false,
+      "component": "month.month-usage"
+    },
+    "month2": {
+      "type": "component",
+      "repeatable": false,
+      "component": "month.month-usage"
+    },
+    "month3": {
+      "type": "component",
+      "repeatable": false,
+      "component": "month.month-usage"
     }
   }
 }
