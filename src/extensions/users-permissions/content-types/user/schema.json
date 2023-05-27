@@ -85,6 +85,13 @@
     },
     "zipcode": {
       "type": "string"
+    },
+    "referenceCode": {
+      "type": "string"
+    },
+    "wallet": {
+      "type": "float",
+      "default": 0
     }
   }
 }
