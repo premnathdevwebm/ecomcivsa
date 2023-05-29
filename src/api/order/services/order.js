@@ -7,8 +7,7 @@ const {
   transcationList,
   shipOrderInvoice,
 } = require("../../../plugins/shiprocket");
-const { sendEmail } = require("../../../plugins/sendgrid");
-const generateMailBody = require("../../../plugins/sendgrid/templates");
+const sendEmail = require("../../../plugins/sendgrid");
 const { message } = require("../../../plugins/twilio");
 
 /**
@@ -26,19 +25,17 @@ myEmitter.on("sms", async (arg1, arg2) => {
   }
 });
 
-myEmitter.on("mail", async (arg1, arg2) => {
+myEmitter.on("mail", async (arg1) => {
   try {
-    await sendEmail(
-      arg1,
-      process.env.SENDGRID_SENDER_MAIL,
-      "support@civsa.in",
-      "order placed",
-      process.env.SENDGRID_SENDER_MAIL,
-      arg2
-    );
+    const attachmentsExist = arg1.attachements.some((attachment) => attachment !== null && attachment !== undefined);
+    const response = await sendEmail(
+      arg1.order.username, arg1.order.orderId, arg1.order.shipmentId, true, attachmentsExist, arg1.attachements
+    ); 
+    console.log("----", response);
+    return response
   } catch (error) {
-    console.log(error.response.data);
-    return error.response.data;
+    console.log(error.response);
+    return error.response;
   }
 });
 
@@ -66,16 +63,14 @@ myEmitter.on("updateOrder", (arg, arg1) => {
         `${arg1.payload.shipment_id}`,
         `${arg1.payload.order_id}`
       );
-      const mailBody = generateMailBody(
-        arg[0].users_permissions_user.username,
-        `${arg1.payload.shipment_id}`,
-        `${arg1.payload.order_id}`
-      );
-      myEmitter.emit(
-        "mail",
-        [arg1?.payload?.label_url, arg1?.payload?.manifest_url],
-        mailBody
-      );
+      myEmitter.emit("mail", {
+        order: {
+          username: arg[0].users_permissions_user.username,
+          shipmentId: `${arg1.payload.shipment_id}`,
+          orderId: `${arg1.payload.order_id}`,
+        },
+        attachements: [arg1?.payload?.label_url, arg1?.payload?.manifest_url],
+      });
     } catch (err) {
       console.log(JSON.stringify(err));
       return err;
