@@ -30,7 +30,7 @@ async function calling(body) {
     const obj = {
       order_id: randomNum,
       order_date: `${year}-${month}-${date} ${hours}:${minutes}`,
-      pickup_location: "Ceego Labs",
+      pickup_location: "Civsa",
       comment: "Orders made and produceed by cisva",
       billing_customer_name: body.name,
       billing_last_name: body.name,

@@ -30,8 +30,7 @@ myEmitter.on("mail", async (arg1) => {
     const attachmentsExist = arg1.attachements.some((attachment) => attachment !== null && attachment !== undefined);
     const response = sendEmail(
       arg1.order.username, arg1.order.orderId, arg1.order.shipmentId, true, attachmentsExist, arg1.attachements
-    ); 
-    console.log("----", response);
+    );
     return response
   } catch (error) {
     console.log(error.response);
