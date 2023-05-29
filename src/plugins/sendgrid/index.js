@@ -58,7 +58,7 @@ function mail(name, order, ship, ccExist, attachmentsExist, attachedUrls) {
         <div class="content">
           <h1>Order Placed</h1>
           <p>Dear Team,</p>
-          <p>An order ID: ${order} and shipment ID: ${ship} has been placed by ${name}.</p>
+          <p>An order ID: ${order} and shipment ID: ${ship} has been placed by customer ${name}.</p>
           <p>Best regards,<br>Civsa</p>
         </div>
     
