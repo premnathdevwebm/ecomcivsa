@@ -19,7 +19,7 @@ const myEmitter = new EventEmitter();
 
 myEmitter.on("sms", async (arg1, arg2) => {
   try {
-    await message(`An order was placed with shipment Id: ${arg1} order Id: ${arg2} check on mail info@civsa.in or support@civsa.in for futher details.`, "9500923437");
+    await message(`An order was placed with shipment Id: ${arg1} order Id: ${arg2} check on mail info@civsa.in or support@civsa.in for futher details.`, "+919500923437");
   } catch (error) {
     console.error(error);
   }
