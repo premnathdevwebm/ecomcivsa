@@ -116,10 +116,10 @@ function mail(name, order, ship, ccExist, attachmentsExist, attachedUrls) {
           sgMail
             .send(msg)
             .then(() => {
-              console.log("Email sent");
+              return { status: true, data: "Email sent" };
             })
             .catch((error) => {
-              console.error(error.response.body);
+              return error.response;
             });
         }
         sendEmail();
