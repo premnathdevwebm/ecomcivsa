@@ -95,7 +95,6 @@ async function payment(body) {
       description: body.description,
       confirm: true,
     });
-    strapi.log.debug((paymentIntent.client_secret))
     return paymentIntent.client_secret;
   } catch (err) {
     console.log("FAILURE");
