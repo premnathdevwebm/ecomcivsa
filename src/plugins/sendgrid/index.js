@@ -51,7 +51,7 @@ function mail(name, order, ship, ccExist, attachmentsExist, attachedUrls) {
       <body>
         <!-- Header -->
         <div class="header">
-          <img class="logo" src="https://civsa.in/assets/uploads/media-uploader/png-logo-011672403308.png" alt="Company Logo">
+          <img class="logo" src="https://www.civsa.in/static/media/logo.f0881365a5d3271ddd21.png" alt="Company Logo">
         </div>
     
         <!-- Content -->
