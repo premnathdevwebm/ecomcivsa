@@ -88,8 +88,6 @@ myEmitter.on("attachInvoice", async (arg1) => {
 
 async function payment(body) {
   try {
-    console.log("BODY");
-    strapi.log.debug(JSON.stringify(body))
     const paymentIntent = await stripe.paymentIntents.create({
       payment_method: body.payment_method_id,
       amount: body.amount,
@@ -97,8 +95,7 @@ async function payment(body) {
       description: body.description,
       confirm: true,
     });
-    console.log("SUCCESS");
-    strapi.log.debug(JSON.stringify(paymentIntent))
+    strapi.log.debug((paymentIntent.client_secret))
     return paymentIntent.client_secret;
   } catch (err) {
     console.log("FAILURE");
