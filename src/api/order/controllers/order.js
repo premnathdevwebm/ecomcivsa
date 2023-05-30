@@ -12,7 +12,7 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
       const response = await strapi
         .service("api::order.order")
         .createPayment({ data: ctx.request.body, userId: ctx.state.user.id });
-      strapi.log.debug(response);
+  
       return response;
     } catch (err) {
       strapi.log.error(err);
